@@ -29,38 +29,39 @@
 .da-slider-fb  .da-slide.da-slide-current{
 	left: 0px;
 }
-.da-slide h2,
-.da-slide p,
-.da-slide .da-link,
-.da-slide .da-img{
+.da-slide .da-anim1,
+.da-slide .da-anim2,
+.da-slide .da-anim3,
+.da-slide .da-anim4{
 	position: absolute;
 	opacity: 0;
-	left: 110%;
 }
-.da-slider-fb .da-slide h2,
-.da-slider-fb .da-slide p,
-.da-slider-fb .da-slide .da-link{
+.da-slider-fb .da-slide .da-anim1,
+.da-slider-fb .da-slide .da-anim2,
+.da-slider-fb .da-slide .da-anim3{
 	left: 10%;
 	opacity: 1;
 }
-.da-slider-fb .da-slide .da-img{
+.da-slider-fb .da-slide .da-anim4{
 	left: 60%;
 	opacity: 1;
 }
-.da-slide h2{
+.da-slide .da-anim1{
 	color: #fff;
 	font-size: 66px;
 	width: 50%;
 	top: 60px;
+	left: 10%;
 	white-space: nowrap;
 	z-index: 10;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 	font-family: 'Economica', Arial, sans-serif;
 	font-weight: 700;
 }
-.da-slide p{
+.da-slide .da-anim2{
 	width: 45%;
 	top: 155px;
+	left: 10%;
 	color: #916c05;
 	font-size: 18px;
 	line-height: 26px;
@@ -71,16 +72,17 @@
 	font-weight: 400;
 	font-style: italic;
 }
-.da-slide .da-img{
+.da-slide .da-anim4{
 	text-align: center;
 	width: 30%;
 	top: 70px;
 	height: 256px;
 	line-height: 320px;
-	left: 110%; /*60%*/
+	left: 60%;
 }
-.da-slide .da-link{
+.da-slide .da-anim3{
 	top: 270px; /*depends on p height*/
+	left: 10%;
 	border-radius: 30px;
 	box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
 	color: #fff;
@@ -93,7 +95,7 @@
 	text-align: center;
 	background: rgba(255,255,255,0.2);
 }
-.da-slide .da-link:hover{
+.da-slide .da-anim3:hover{
 	background: rgba(255,255,255,0.3);
 }
 .da-dots{
@@ -180,144 +182,144 @@
 	right: 15px;
 }
 
-.da-slide-current h2,
-.da-slide-current p,
-.da-slide-current .da-link{
+.da-slide-current .da-anim1,
+.da-slide-current .da-anim2,
+.da-slide-current .da-anim3{
 	left: 10%;
 	opacity: 1;
 }
-.da-slide-current .da-img{
+.da-slide-current .da-anim4{
 	left: 60%;
 	opacity: 1;
 }
 /* Animation classes and animations */
 
 /* Slide in from the right*/
-.da-slide-fromright h2{
+.da-slide-fromright .da-anim1{
 	animation: fromRightAnim1 0.6s ease-in 0.8s both;
 }
-.da-slide-fromright p{
+.da-slide-fromright .da-anim2{
 	animation: fromRightAnim2 0.6s ease-in 0.8s both;
 }
-.da-slide-fromright .da-link{
+.da-slide-fromright .da-anim3{
 	animation: fromRightAnim3 0.4s ease-in 1.2s both;
 }
-.da-slide-fromright .da-img{
+.da-slide-fromright .da-anim4{
 	animation: fromRightAnim4 0.6s ease-in 0.8s both;
 }
 
 @keyframes fromRightAnim1{
-	0%{ left: 110%; opacity: 0; }
-	100%{ left: 10%; opacity: 1; }
+	0%{ transform: translateX(110vw); opacity: 0; }
+	100%{ opacity: 1; }
 }
 @keyframes fromRightAnim2{
-	0%{ left: 110%; opacity: 0; }
-	100%{ left: 10%; opacity: 1; }
+	0%{ transform: translateX(110vw); opacity: 0; }
+	100%{ opacity: 1; }
 }
 @keyframes fromRightAnim3{
-	0%{ left: 110%; opacity: 0; }
-	1%{ left: 10%; opacity: 0; }
-	100%{ left: 10%; opacity: 1; }
+	0%{ transform: translateX(110vw); opacity: 0; }
+	1%{ transform: translateX(0); opacity: 0; }
+	100%{ opacity: 1; }
 }
 @keyframes fromRightAnim4{
-	0%{ left: 110%; opacity: 0; }
-	100%{ left: 60%; opacity: 1; }
+	0%{ transform: translateX(110vw); opacity: 0; }
+	100%{ transform: translateX(0); opacity: 1; }
 }
 /* Slide in from the left*/
-.da-slide-fromleft h2{
+.da-slide-fromleft .da-anim1{
 	animation: fromLeftAnim1 0.6s ease-in 0.6s both;
 }
-.da-slide-fromleft p{
+.da-slide-fromleft .da-anim2{
 	animation: fromLeftAnim2 0.6s ease-in 0.6s both;
 }
-.da-slide-fromleft .da-link{
+.da-slide-fromleft .da-anim3{
 	animation: fromLeftAnim3 0.4s ease-in 1.2s both;
 }
-.da-slide-fromleft .da-img{
+.da-slide-fromleft .da-anim4{
 	animation: fromLeftAnim4 0.6s ease-in 0.6s both;
 }
 
 @keyframes fromLeftAnim1{
-	0%{ left: -110%; opacity: 0; }
-	100%{ left: 10%; opacity: 1; }
+	0%{ transform: translateX(-110vw); opacity: 0; }
+	100%{ opacity: 1; }
 }
 @keyframes fromLeftAnim2{
-	0%{ left: -110%; opacity: 0; }
-	100%{ left: 10%; opacity: 1; }
+	0%{ transform: translateX(-110vw); opacity: 0; }
+	100%{ opacity: 1; }
 }
 @keyframes fromLeftAnim3{
-	0%{ left: -110%; opacity: 0; }
-	1%{ left: 10%; opacity: 0; }
-	100%{ left: 10%; opacity: 1; }
+	0%{transform: translateX(-110vw); opacity: 0; }
+	1%{ transform: translateX(0); opacity: 0; }
+	100%{ opacity: 1; }
 }
 @keyframes fromLeftAnim4{
-	0%{ left: -110%; opacity: 0; }
-	100%{ left: 60%; opacity: 1; }
+	0%{ transform: translateX(-110vw); opacity: 0; }
+	100%{ transform: translateX(0); opacity: 1; }
 }
 /* Slide out to the right */
-.da-slide-toright h2{
+.da-slide-toright .da-anim1{
 	animation: toRightAnim1 0.6s ease-in 0.6s both;
 }
-.da-slide-toright p{
+.da-slide-toright .da-anim2{
 	animation: toRightAnim2 0.6s ease-in 0.3s both;
 }
-.da-slide-toright .da-link{
+.da-slide-toright .da-anim3{
 	animation: toRightAnim3 0.4s ease-in both;
 }
-.da-slide-toright .da-img{
+.da-slide-toright .da-anim4{
 	animation: toRightAnim4 0.6s ease-in both;
 }
 
 @keyframes toRightAnim1{
-	0%{ left: 10%;  opacity: 1; }
-	100%{ left: 100%; opacity: 0; }
+	0%{ opacity: 1; }
+	100%{ transform: translateX(100vw); opacity: 0; }
 }
 @keyframes toRightAnim2{
-	0%{ left: 10%;  opacity: 1; }
-	100%{ left: 100%; opacity: 0; }
+	0%{ opacity: 1; }
+	100%{transform: translateX(100vw); opacity: 0; }
 }
 @keyframes toRightAnim3{
-	0%{ left: 10%;  opacity: 1; }
-	99%{ left: 10%; opacity: 0; }
-	100%{ left: 100%; opacity: 0; }
+	0%{ transform: translateX(0); opacity: 1; }
+	99%{ transform: translateX(0); opacity: 0; }
+	100%{ transform: translateX(100vw); opacity: 0; }
 }
 @keyframes toRightAnim4{
-	0%{ left: 60%;  opacity: 1; }
-	30%{ left: 55%;  opacity: 1; }
-	100%{ left: 100%; opacity: 0; }
+	0%{ opacity: 1; }
+	30%{ transform: translateX(-5vw);  opacity: 1; }
+	100%{ transform: translateX(100vw); opacity: 1; }
 }
 /* Slide out to the left*/
-.da-slide-toleft h2{
+.da-slide-toleft .da-anim1{
 	animation: toLeftAnim1 0.6s ease-in both;
 }
-.da-slide-toleft p{
+.da-slide-toleft .da-anim2{
 	animation: toLeftAnim2 0.6s ease-in 0.3s both;
 }
-.da-slide-toleft .da-link{
+.da-slide-toleft .da-anim3{
 	animation: toLeftAnim3 0.4s ease-in both;
 }
-.da-slide-toleft .da-img{
+.da-slide-toleft .da-anim4{
 	animation: toLeftAnim4 0.6s ease-in 0.6s both;
 }
 
 @keyframes toLeftAnim1{
-	0%{ left: 10%;  opacity: 1; }
-	30%{ left: 15%;  opacity: 1; }
-	100%{ left: -50%; opacity: 0; }
+	0%{  opacity: 1; }
+	30%{ transform: translateX(5vw);  opacity: 1; }
+	100%{ transform: translateX(-50vw); opacity: 0; }
 }
 @keyframes toLeftAnim2{
-	0%{ left: 10%;  opacity: 1; }
-	30%{ left: 15%;  opacity: 1; }
-	100%{ left: -50%; opacity: 0; }
+	0%{  opacity: 1; }
+	30%{ transform: translateX(5vw);  opacity: 1; }
+	100%{ transform: translateX(-50vw); opacity: 0; }
 }
 @keyframes toLeftAnim3{
-	0%{ left: 10%;  opacity: 1; }
-	99%{ left: 10%; opacity: 0; }
-	100%{ left: -50%; opacity: 0; }
+	0%{ transform: translateX(0); opacity: 1; }
+	99%{ transform: translateX(0); opacity: 0; }
+	100%{ transform: translateX(-50vw); opacity: 0; }
 }
 @keyframes toLeftAnim4{
-	0%{ left: 60%;  opacity: 1; }
-	40%{ left: 70%;  opacity: 1; }
-	90%{ left: 0%;  opacity: 0; }
-	100%{ left: -50%; opacity: 0; }
+	0%{ opacity: 1; }
+	40%{ transform: translateX(10vw);  opacity: 1; }
+	90%{ transform: translateX(-40vw);  opacity: 0; }
+	100%{ transform: translateX(-50vw); opacity: 0; }
 }
