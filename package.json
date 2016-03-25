@@ -1,26 +1,27 @@
 {
-  "name": "cslide",
+  "name": "pslider",
   "version": "0.1.0",
   "description": "A simple parallax slider",
-  "main": "lib/cslider.js",
+  "main": "lib/pslider.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "addprefixes": "postcss --use autoprefixer -b 'last 2 versions' src/style.css -o lib/style.css",
-    "build": "npm run addprefixes && cp src/cslider.js lib/"
+    "build": "npm run addprefixes && cp src/pslider.js lib/"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jbmartinez/cslider.git"
+    "url": "https://github.com/jbmartinez/pslider.git"
   },
   "keywords": [
-    "slider"
+    "slider",
+    "parallax"
   ],
   "author": "Juan Martínez",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jbmartinez/cslider/issues"
+    "url": "https://github.com/jbmartinez/pslider/issues"
   },
-  "homepage": "https://github.com/jbmartinez/cslider",
+  "homepage": "https://github.com/jbmartinez/pslider",
   "devDependencies": {
     "autoprefixer": "^6.3.4",
     "postcss-cli": "^2.5.1"
