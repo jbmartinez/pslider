@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Parallax Content Slider Demo</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Parallax Content Slider Demo" />
+        <meta name="keywords" content="slider, animations, parallax, delayed, easing, css3" />
+        <meta name="author" content="Juan Martínez" />
+        <!--general styles-->
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <!--cslider base styles-->
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <!--custom look styles-->
+        <link rel="stylesheet" type="text/css" href="css/skin.css" />
+        <link href='http://fonts.googleapis.com/css?family=Economica:700,400italic' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Parallax Content Slider</h1>
+                <h2>A content slider with delayed animations and background parallax effect based on
+                    <a href="http://tympanus.net/codrops/2012/03/15/parallax-content-slider-with-css3-and-jquery/">
+                        <strong>this Codrops Article</strong>
+                    </a>
+                </h2>
+                <p>This is a slightly modified version of the original demo</p>
+            </header>
+            <div id="da-slider" class="da-slider">
+                <div class="da-slide">
+                    <h2 class="da-anim1">Warm welcome</h2>
+                    <p class="da-anim2">When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.</p>
+                    <a href="#" class="da-anim3">Read more</a>
+                    <div class="da-anim4"><img src="images/1.png" alt="image01" /></div>
+                </div>
+                <div class="da-slide">
+                    <h2 class="da-anim1">Easy management</h2>
+                    <p class="da-anim2">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                    <a href="#" class="da-anim3">Read more</a>
+                    <div class="da-anim4"><img src="images/2.png" alt="image01" /></div>
+                </div>
+                <div class="da-slide">
+                    <h2 class="da-anim1">Revolution</h2>
+                    <p class="da-anim2">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+                    <a href="#" class="da-anim3">Read more</a>
+                    <div class="da-anim4"><img src="images/3.png" alt="image01" /></div>
+                </div>
+                <div class="da-slide">
+                    <h2 class="da-anim1">Quality Control</h2>
+                    <p class="da-anim2">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                    <a href="#" class="da-anim3">Read more</a>
+                    <div class="da-anim4"><img src="images/4.png" alt="image01" /></div>
+                </div>
+                <nav class="da-arrows">
+                    <span class="da-arrows-prev"></span>
+                    <span class="da-arrows-next"></span>
+                </nav>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/cslider.js"></script>
+        <script type="text/javascript">
+            new Slider('da-slider');
+        </script>
+    </body>
+</html>
