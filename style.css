@@ -1,14 +1,7 @@
 .da-slider{
-	width: 100%;
-	min-width: 520px;
 	height: 400px;
 	position: relative;
-	margin: 30px auto;
 	overflow: hidden;
-	background: transparent url(../images/waves.gif) repeat 0% 0%;
-	border-top: 8px solid #efc34a;
-	border-bottom: 8px solid #efc34a;
-	box-shadow: 0px 1px 1px rgba(0,0,0,0.2), 0px -2px 1px #fff;
 	transition: background-position 1.4s ease-in-out 0.3s;
 }
 .da-slide{
@@ -17,86 +10,15 @@
 	height: 100%;
 	top: 0px;
 	left: 0px;
-	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
-	text-align: left;
 }
 .da-slide-current{
 	z-index: 1000;
-}
-.da-slider-fb .da-slide{
-	left: 100%;
-}
-.da-slider-fb  .da-slide.da-slide-current{
-	left: 0px;
 }
 .da-slide .da-anim1,
 .da-slide .da-anim2,
 .da-slide .da-anim3,
 .da-slide .da-anim4{
-	position: absolute;
 	opacity: 0;
-}
-.da-slider-fb .da-slide .da-anim1,
-.da-slider-fb .da-slide .da-anim2,
-.da-slider-fb .da-slide .da-anim3{
-	left: 10%;
-	opacity: 1;
-}
-.da-slider-fb .da-slide .da-anim4{
-	left: 60%;
-	opacity: 1;
-}
-.da-slide .da-anim1{
-	color: #fff;
-	font-size: 66px;
-	width: 50%;
-	top: 60px;
-	left: 10%;
-	white-space: nowrap;
-	z-index: 10;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-	font-family: 'Economica', Arial, sans-serif;
-	font-weight: 700;
-}
-.da-slide .da-anim2{
-	width: 45%;
-	top: 155px;
-	left: 10%;
-	color: #916c05;
-	font-size: 18px;
-	line-height: 26px;
-	height: 80px;
-	overflow: hidden;
-	font-style: italic;
-	font-family: 'Economica', Arial, sans-serif;
-	font-weight: 400;
-	font-style: italic;
-}
-.da-slide .da-anim4{
-	text-align: center;
-	width: 30%;
-	top: 70px;
-	height: 256px;
-	line-height: 320px;
-	left: 60%;
-}
-.da-slide .da-anim3{
-	top: 270px; /*depends on p height*/
-	left: 10%;
-	border-radius: 30px;
-	box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
-	color: #fff;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
-	border: 8px solid rgba(255,255,255,0.8);
-	padding: 2px 20px 0px;
-	font-size: 18px;
-	line-height: 30px;
-	width: 80px;
-	text-align: center;
-	background: rgba(255,255,255,0.2);
-}
-.da-slide .da-anim3:hover{
-	background: rgba(255,255,255,0.3);
 }
 .da-dots{
 	width: 100%;
@@ -105,8 +27,7 @@
 	left: 0px;
 	bottom: 20px;
 	z-index: 2000;
-	-moz-user-select: none;
-	-webkit-user-select: none;
+	user-select: none;
 }
 .da-dots span{
 	display: inline-block;
@@ -114,7 +35,7 @@
 	width: 12px;
 	height: 12px;
 	border-radius: 50%;
-	background: #e4b42d;
+	background: rgba(0, 0, 0, 0.6);
 	margin: 3px;
 	cursor: pointer;
 	box-shadow: 
@@ -143,7 +64,7 @@
 	height: 30px;
 	width: 30px;
 	border-radius: 50%;
-	background: #e4b42d;
+	background: rgba(0,0,0,0.6);
 	cursor: pointer;
 	z-index: 2000;
 	opacity: 0;
@@ -156,13 +77,15 @@
 	opacity: 1;
 }
 .da-arrows span:after{
-	content: '';
+	color: white;
+	line-height: 16px;
+	font-size: 30px;
+	font-family: Times, Serif;
 	position: absolute;
 	width: 20px;
 	height: 20px;
 	top: 5px;
 	left: 5px;
-	background: transparent url(../images/arrows.png) no-repeat top left;
 	border-radius: 50%;
 	box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
@@ -172,8 +95,11 @@
 .da-arrows span:active:after{
 	box-shadow: 1px 1px 1px rgba(255,255,255,0.1);
 }
+.da-arrows span.da-arrows-prev:after{
+	content: "\2039";
+}
 .da-arrows span.da-arrows-next:after{
-	background-position: top right;
+	content: "\203A";
 }
 .da-arrows span.da-arrows-prev{
 	left: 15px;
@@ -185,13 +111,12 @@
 .da-slide-current .da-anim1,
 .da-slide-current .da-anim2,
 .da-slide-current .da-anim3{
-	left: 10%;
 	opacity: 1;
 }
 .da-slide-current .da-anim4{
-	left: 60%;
 	opacity: 1;
 }
+
 /* Animation classes and animations */
 
 /* Slide in from the right*/
