@@ -1,6 +1,6 @@
 {
   "name": "cslide",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A simple parallax slider",
   "main": "cslider.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "slider"
   ],
   "author": "Juan Martínez",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jbmartinez/cslider/issues"
   },
