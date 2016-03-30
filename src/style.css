@@ -124,7 +124,7 @@
 	animation: fromRightAnim1 0.6s ease-in 0.8s both;
 }
 .da-slide-fromright .da-anim2{
-	animation: fromRightAnim2 0.6s ease-in 0.8s both;
+	animation: fromRightAnim1 0.6s ease-in 0.8s both;
 }
 .da-slide-fromright .da-anim3{
 	animation: fromRightAnim3 0.4s ease-in 1.2s both;
@@ -134,10 +134,6 @@
 }
 
 @keyframes fromRightAnim1{
-	0%{ transform: translateX(110vw); opacity: 0; }
-	100%{ opacity: 1; }
-}
-@keyframes fromRightAnim2{
 	0%{ transform: translateX(110vw); opacity: 0; }
 	100%{ opacity: 1; }
 }
@@ -155,7 +151,7 @@
 	animation: fromLeftAnim1 0.6s ease-in 0.6s both;
 }
 .da-slide-fromleft .da-anim2{
-	animation: fromLeftAnim2 0.6s ease-in 0.6s both;
+	animation: fromLeftAnim1 0.6s ease-in 0.6s both;
 }
 .da-slide-fromleft .da-anim3{
 	animation: fromLeftAnim3 0.4s ease-in 1.2s both;
@@ -165,10 +161,6 @@
 }
 
 @keyframes fromLeftAnim1{
-	0%{ transform: translateX(-110vw); opacity: 0; }
-	100%{ opacity: 1; }
-}
-@keyframes fromLeftAnim2{
 	0%{ transform: translateX(-110vw); opacity: 0; }
 	100%{ opacity: 1; }
 }
@@ -186,7 +178,7 @@
 	animation: toRightAnim1 0.6s ease-in 0.6s both;
 }
 .da-slide-toright .da-anim2{
-	animation: toRightAnim2 0.6s ease-in 0.3s both;
+	animation: toRightAnim1 0.6s ease-in 0.3s both;
 }
 .da-slide-toright .da-anim3{
 	animation: toRightAnim3 0.4s ease-in both;
@@ -198,10 +190,6 @@
 @keyframes toRightAnim1{
 	0%{ opacity: 1; }
 	100%{ transform: translateX(100vw); opacity: 0; }
-}
-@keyframes toRightAnim2{
-	0%{ opacity: 1; }
-	100%{transform: translateX(100vw); opacity: 0; }
 }
 @keyframes toRightAnim3{
 	0%{ transform: translateX(0); opacity: 1; }
@@ -218,7 +206,7 @@
 	animation: toLeftAnim1 0.6s ease-in both;
 }
 .da-slide-toleft .da-anim2{
-	animation: toLeftAnim2 0.6s ease-in 0.3s both;
+	animation: toLeftAnim1 0.6s ease-in 0.3s both;
 }
 .da-slide-toleft .da-anim3{
 	animation: toLeftAnim3 0.4s ease-in both;
@@ -228,11 +216,6 @@
 }
 
 @keyframes toLeftAnim1{
-	0%{  opacity: 1; }
-	30%{ transform: translateX(5vw);  opacity: 1; }
-	100%{ transform: translateX(-50vw); opacity: 0; }
-}
-@keyframes toLeftAnim2{
 	0%{  opacity: 1; }
 	30%{ transform: translateX(5vw);  opacity: 1; }
 	100%{ transform: translateX(-50vw); opacity: 0; }
