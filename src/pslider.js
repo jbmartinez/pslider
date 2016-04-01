@@ -80,11 +80,176 @@ var Slider = (function() {
   }
 
   /*
+   * Private functions
+   */
+  function createNav(slidesCount) {
+    var $navigation = document.createElement('nav');
+    $navigation.className = 'da-dots';
+
+    for (var i = 0; i < slidesCount; ++i) {
+     var tmp = document.createElement('span');
+     $navigation.appendChild(tmp);
+    }
+    return $navigation;
+  }
+
+  function init(slider, options) {
+    slider.options = deepExtend({}, Slider.defaults, options);
+
+    slider.$slides = slider.$el.querySelectorAll('.da-slide');
+    slider.slidesCount = slider.$slides.length;
+    slider.current = slider.options.current;
+
+    if (slider.current < 0 || slider.current >= slider.slidesCount) {
+     slider.current  = 0;
+    }
+
+    addClass(slider.$slides[slider.current], 'da-slide-current');
+
+    var $navigation = createNav(slider.slidesCount);
+    slider.$el.appendChild($navigation);
+
+    slider.$pages = slider.$el.querySelectorAll('nav.da-dots > span');
+    slider.$pages = Array.prototype.slice.call(slider.$pages);
+    slider.$navNext = slider.$el.querySelector('span.da-arrows-next');
+    slider.$navPrev = slider.$el.querySelector('span.da-arrows-prev');
+
+    slider.isAnimating  = false;
+    slider.bgpositer = 0;
+
+    updatePage(slider);
+
+    // load the events
+    loadEvents(slider);
+
+    // slideshow
+    if (slider.options.autoplay) {
+     startSlideshow(slider);
+    }
+  }
+
+  function updatePage(slider) {
+    var pages = slider.$pages;
+    pages.forEach(function(el) {
+      removeClass(el, 'da-dots-current');
+    });
+    addClass(pages[slider.current], 'da-dots-current');
+  }
+
+  function startSlideshow(slider) {
+    slider.slideshow  = setTimeout( function() {
+      if (!slider.options.autoplay) {
+        return;
+      }
+      var page = (slider.current < slider.slidesCount - 1) ? slider.current + 1 : 0;
+      navigate(slider, page, 'next');
+      startSlideshow(slider);
+    }, slider.options.interval );
+  }
+
+  function navigate(slider, page, dir) {
+    if (slider.current === page || slider.isAnimating) {
+      return false;
+    }
+
+    var $current = slider.$slides[slider.current];
+    var $next;
+
+    slider.isAnimating = true;
+
+    // check dir
+    var classTo, classFrom, d;
+
+    if (!dir) {
+      d = page > slider.current ? 'next' : 'prev';
+    } else {
+      d = dir;
+    }
+
+    if (d === 'next') {
+      classTo = 'da-slide-toleft';
+      classFrom = 'da-slide-fromright';
+      ++slider.bgpositer;
+    } else {
+      classTo = 'da-slide-toright';
+      classFrom = 'da-slide-fromleft';
+      --slider.bgpositer;
+    }
+
+    slider.$el.style.backgroundPosition = slider.bgpositer * slider.options.bgincrement + '% 0%';
+
+    slider.current = page;
+    $next = slider.$slides[slider.current];
+
+    var rmClasses  = 'da-slide-toleft da-slide-toright da-slide-fromleft da-slide-fromright';
+    removeClass($current, rmClasses);
+    removeClass($next, rmClasses);
+
+    addClass($current, classTo);
+    addClass($next, classFrom);
+
+    removeClass($current, 'da-slide-current');
+    addClass($next, 'da-slide-current');
+
+    updatePage(slider);
+  }
+
+  function loadEvents(slider) {
+    var pagesClick = function(event) {
+      slider.page(slider.$pages.indexOf(event.target));
+      return false;
+    };
+
+    slider.$pages.forEach(function(el) {
+      el.addEventListener('click', pagesClick);
+    });
+
+    slider.$navNext.addEventListener('click', function(event) {
+      if (slider.options.autoplay) {
+        clearTimeout(slider.slideshow);
+        slider.options.autoplay = false;
+      }
+
+      var page = slider.current < slider.slidesCount - 1 ? slider.current + 1 : 0;
+      navigate(slider, page, 'next');
+      return false;
+    });
+
+    slider.$navPrev.addEventListener('click', function(event) {
+      if (slider.options.autoplay) {
+        clearTimeout(slider.slideshow);
+        slider.options.autoplay = false;
+      }
+
+      var page = slider.current > 0 ? slider.current - 1 : slider.slidesCount - 1;
+      navigate(slider, page, 'prev');
+      return false;
+    });
+
+    if (!slider.options.bgincrement) {
+      var animationEvent = whichAnimationEvent();
+      slider.$el.addEventListener(animationEvent, function( event ) {
+        if (event.animationName === 'toRightAnim4' || event.animationName === 'toLeftAnim4' ) {
+          slider.isAnimating  = false;
+        }
+      });
+
+    } else {
+      var transitionEvent = whichTransitionEvent();
+      slider.$el.addEventListener(transitionEvent, function(event) {
+        if (event.target.id === slider.$el.id) {
+          slider.isAnimating  = false;
+        }
+      });
+    }
+  }
+
+  /*
    * Slider object.
    */
   Slider = function(element, options) {
     this.$el  = document.getElementById(element);
-    this._init(options || {});
+    init(this, options || {});
   };
 
   Slider.defaults = {
@@ -95,143 +260,6 @@ var Slider = (function() {
   };
 
   Slider.prototype = {
-    _init: function(options) {
-
-      this.options = deepExtend({}, Slider.defaults, options);
-
-      this.$slides = this.$el.querySelectorAll('div.da-slide');
-      this.slidesCount = this.$slides.length;
-
-      this.current = this.options.current;
-
-      if (this.current < 0 || this.current >= this.slidesCount) {
-        this.current  = 0;
-      }
-
-      addClass(this.$slides[this.current], 'da-slide-current');
-
-      var $navigation = document.createElement('nav');
-      $navigation.className = 'da-dots';
-
-      for (var i = 0; i < this.slidesCount; ++i) {
-        var tmp = document.createElement('span');
-        $navigation.appendChild(tmp);
-      }
-
-      this.$el.appendChild($navigation);
-
-      this.$pages = this.$el.querySelectorAll('nav.da-dots > span');
-      // convert to an array
-      this.$pages = Array.prototype.slice.call(this.$pages);
-      this.$navNext = this.$el.querySelector('span.da-arrows-next');
-      this.$navPrev = this.$el.querySelector('span.da-arrows-prev');
-
-      this.isAnimating  = false;
-      this.bgpositer    = 0;
-
-      // this.cssAnimations  = Modernizr.cssanimations;
-      // this.cssTransitions  = Modernizr.csstransitions;
-      this.cssAnimations  = true;
-      this.cssTransitions  = true;
-
-      // if ( !this.cssAnimations || !this.cssAnimations ) {
-      //   this.$el.addClass( 'da-slider-fb' );
-      // }
-
-      this._updatePage();
-
-      // load the events
-      this._loadEvents();
-
-      // slideshow
-      if (this.options.autoplay) {
-        this._startSlideshow();
-      }
-
-    },
-    _navigate: function(page, dir) {
-      var $current  = this.$slides[this.current], $next, _self = this;
-
-      if (this.current === page || this.isAnimating) {
-        return false;
-      }
-
-      this.isAnimating  = true;
-
-      // check dir
-      var classTo, classFrom, d;
-
-      if (!dir) {
-        (page > this.current) ? d = 'next' : d = 'prev';
-      } else {
-        d = dir;
-      }
-
-      if (this.cssAnimations && this.cssAnimations) {
-        if (d === 'next') {
-          classTo = 'da-slide-toleft';
-          classFrom = 'da-slide-fromright';
-          ++this.bgpositer;
-        } else {
-          classTo = 'da-slide-toright';
-          classFrom = 'da-slide-fromleft';
-          --this.bgpositer;
-        }
-
-        this.$el.style.backgroundPosition = this.bgpositer * this.options.bgincrement + '% 0%';
-      }
-
-      this.current = page;
-      $next = this.$slides[this.current];
-
-      if (this.cssAnimations && this.cssAnimations) {
-        var rmClasses  = 'da-slide-toleft da-slide-toright da-slide-fromleft da-slide-fromright';
-        removeClass($current, rmClasses);
-        removeClass($next, rmClasses);
-
-        addClass($current, classTo);
-        addClass($next, classFrom);
-
-        removeClass($current, 'da-slide-current');
-        addClass($next, 'da-slide-current');
-}
-
-      // fallback
-      // if ( !this.cssAnimations || !this.cssAnimations ) {
-      //
-      //   $next.css( 'left', ( d === 'next' ) ? '100%' : '-100%' ).stop().animate( {
-      //     left : '0%'
-      //   }, 1000, function() {
-      //     _self.isAnimating = false;
-      //   });
-      //
-      //   $current.stop().animate( {
-      //     left : ( d === 'next' ) ? '-100%' : '100%'
-      //   }, 1000, function() {
-      //     $current.removeClass( 'da-slide-current' );
-      //   });
-      //
-      // }
-
-      this._updatePage();
-    },
-    _updatePage: function() {
-      this.$pages.forEach(function(el) {
-        removeClass(el, 'da-dots-current');
-      });
-      addClass(this.$pages[this.current], 'da-dots-current');
-    },
-    _startSlideshow: function() {
-      var _self  = this;
-      this.slideshow  = setTimeout( function() {
-        var page = (_self.current < _self.slidesCount - 1) ? page = _self.current + 1 : page = 0;
-        _self._navigate(page, 'next');
-
-        if (_self.options.autoplay) {
-          _self._startSlideshow();
-        }
-      }, this.options.interval );
-    },
     page: function(idx) {
       if (idx >= this.slidesCount || idx < 0) {
         return false;
@@ -242,64 +270,7 @@ var Slider = (function() {
         this.options.autoplay = false;
       }
 
-      this._navigate(idx);
-    },
-    _loadEvents: function() {
-      var _self = this;
-      var pagesClick = function(event) {
-        _self.page(_self.$pages.indexOf(event.target));
-        return false;
-      };
-      // this.$pages.on( 'click.cslider', function( event ) {
-      //   _self.page( $(this).index() );
-      //   return false;
-      // });
-      this.$pages.forEach(function(el) {
-        el.addEventListener('click', pagesClick);
-      });
-
-      this.$navNext.addEventListener('click', function(event) {
-        if (_self.options.autoplay) {
-          clearTimeout(_self.slideshow);
-          _self.options.autoplay = false;
-        }
-
-        var page = (_self.current < _self.slidesCount - 1) ? page = _self.current + 1 : page = 0;
-        _self._navigate(page, 'next');
-        return false;
-      });
-
-      this.$navPrev.addEventListener('click', function(event) {
-        if (_self.options.autoplay) {
-          clearTimeout(_self.slideshow);
-          _self.options.autoplay = false;
-        }
-
-        var page = (_self.current > 0) ? page = _self.current - 1 : page = _self.slidesCount - 1;
-        _self._navigate(page, 'prev');
-        return false;
-      });
-
-      if (this.cssTransitions) {
-        if (!this.options.bgincrement) {
-          // this.$el.addEventListener('webkitAnimationEnd.cslider animationend.cslider OAnimationEnd.cslider', function( event ) {
-          var animationEvent = whichAnimationEvent();
-          // this.$el.addEventListener('animationend', function( event ) {
-          this.$el.addEventListener(animationEvent, function( event ) {
-            if (event.animationName === 'toRightAnim4' || event.animationName === 'toLeftAnim4' ) {
-              _self.isAnimating  = false;
-            }
-          });
-
-        } else {
-          // this.$el.on( 'webkitTransitionEnd.cslider transitionend.cslider OTransitionEnd.cslider', function( event ) {
-          var transitionEvent = whichTransitionEvent();
-          this.$el.addEventListener(transitionEvent, function(event) {
-            if (event.target.id === _self.$el.id)
-              _self.isAnimating  = false;
-          });
-        }
-      }
+      navigate(this, idx);
     }
   };
 
