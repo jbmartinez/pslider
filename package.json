@@ -5,8 +5,9 @@
   "main": "lib/pslider.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "addprefixes": "postcss --use autoprefixer -b 'last 2 versions' src/style.css -o lib/style.css",
-    "build": "npm run addprefixes && cp src/pslider.js lib/"
+    "build:css": "postcss --use autoprefixer -b 'last 2 versions' src/style.css | tee dist/style.css | cleancss -o dist/style.min.css",
+    "build:js": "cat src/pslider.js | tee dist/pslider.js | uglifyjs -c -m --screw-ie8 -o dist/pslider.min.js",
+    "build": "npm run build:css && npm run build:js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
   "homepage": "https://github.com/jbmartinez/pslider",
   "devDependencies": {
     "autoprefixer": "^6.3.4",
-    "postcss-cli": "^2.5.1"
+    "clean-css": "^3.4.11",
+    "postcss-cli": "^2.5.1",
+    "uglifyjs": "^2.4.10"
   }
 }
